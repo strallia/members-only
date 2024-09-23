@@ -10,9 +10,15 @@ const SQL = `
     last TEXT,
     email TEXT,
     passhash TEXT,
-    is_member BOOLEAN,
+    is_premium BOOLEAN,
     is_admin BOOLEAN
   );
+
+  INSERT INTO users (first, last, email, is_premium, is_admin)
+  VALUES 
+    ('Jane', 'Basic', 'jane@basic.com', false, false),
+    ('John', 'Premium', 'john@premium.com', true, false),
+    ('Jill', 'Admin', 'jill@admin.com', false, true);
 
   CREATE TABLE IF NOT EXISTS messages (
     message_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -21,6 +27,12 @@ const SQL = `
     time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     text TEXT
   );  
+
+  INSERT INTO messages (author_id, title, time, text)
+  VALUES 
+    (1, 'Hello all!', NOW(), 'This is the first comment :)'),
+    (2, 'FIRST!', NOW(), 'JK. Someone beat me to it :('),
+    (3, 'Tis a Good Day', NOW(), 'Lorem ipsum and more random words.');
 `;
 
 const seedDB = async () => { 
