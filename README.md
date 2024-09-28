@@ -10,6 +10,10 @@ To practice authentication with PassportJS using Local Strategy by creating a me
 
 Express, Node, PostgreSQL, EJS, PassportJS
 
+## Features
+
+- Server-side validation and sanitization of form inputs
+
 ## Database Schema
 
 <!-- ![Database schema diagram](./public/db_schema.svg) -->

@@ -7,26 +7,27 @@
 </head>
 <body>
   <h1>Signup</h1>
+  <%- include("../partials/errors") %>
   <form method="post" action="">
     <label>
       First:
-      <input type="text" name="first" id="first">
+      <input type="text" name="first" id="first" >
     </label>
     <label>
       Last:
-      <input type="text" name="last" id="last">
+      <input type="text" name="last" id="last" >
     </label>
     <label>
       Email:
-      <input type="text" name="email" id="email">
+      <input type="email" name="email" id="email" >
     </label>
     <label>
       Password:
-      <input type="text" name="password" id="password">
+      <input type="password" name="password" id="password" >
     </label>
     <label>
       Confirm Password:
-      <input type="text" name="confirm_password" id="confirm_password">
+      <input type="password" name="confirm_password" id="confirm_password" >
     </label>
     <button type="submit">Submit</button>
   </form>
