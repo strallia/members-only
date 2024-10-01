@@ -6,7 +6,7 @@ const formController = require('../controllers/formController');
 formRouter.get("/signup", formController.getSignupPage);
 
 // POST routes
-formRouter.post("/signup", formController.createUser)
+formRouter.post("/signup", formController.validateSignupForm, formController.createUser)
 
 
 module.exports = formRouter;
