@@ -32,6 +32,7 @@
       </ul>
     </div>
     <form action="">
+      <input type="hidden" name="role" id="role" value="">
       <label>
         Enter Secret Password for 
         <span class="display-role"></span> 
@@ -44,24 +45,30 @@
     <script>
       const roleSpan = document.querySelector(".display-role");
       const options = document.querySelectorAll(".role-option");
+      const hiddenInput = document.querySelector("input[type='hidden']");
 
-      const updateRoleSpan = (optionNode) => {
-        const value = optionNode.getAttribute("data-value");
-        roleSpan.textContent = value.charAt(0).toUpperCase() + value.slice(1);
+      const updateRoleSpan = (selectedOption) => {
+        roleSpan.textContent = 
+        selectedOption.charAt(0).toUpperCase() + selectedOption.slice(1);
       }
 
       const highlightRoleOption = (selectedOption) => {
-        const selectedOptionValue = selectedOption.getAttribute("data-value");
         options.forEach((option) => {
           const curOptionValue = option.getAttribute("data-value");
-          if (curOptionValue === selectedOptionValue) option.classList.add("active-option");
+          if (curOptionValue === selectedOption) option.classList.add("active-option");
           else option.classList.remove("active-option");
         });
       }
 
+      const updateHiddenInput = (selectedOption) => {
+        hiddenInput.value = selectedOption;
+      }
+
       options.forEach((option) => option.addEventListener("click", () => {
-        updateRoleSpan(option);
-        highlightRoleOption(option);
+        const selectedOption = option.getAttribute("data-value");
+        updateRoleSpan(selectedOption);
+        highlightRoleOption(selectedOption);
+        updateHiddenInput(selectedOption);
       }));
     </script>
   </div>
