@@ -4,19 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Upgrade Role</title>
+  <style type="text/css">
+    .role-option {
+      cursor: pointer;
+    }
+    .active-option, 
+    .role-option:hover{
+      background-color: lightgray;
+    }
+  </style>
 </head>
 <body>
   <div>
     <h1>Upgrade Account</h1>
     <p>Select the role you want</p>
-    <div>
+    <div class="role-option" data-value="premium">
       <h3>Premium</h3>
       <ul>
         <li>See author and date</li>
       </ul>
     </div>
-    <div>
-    </div>
+    <div class="role-option" data-value="admin">
       <h3>Admin</h3>
       <ul>
         <li>See author and date</li>
@@ -24,11 +32,38 @@
       </ul>
     </div>
     <form action="">
-      <label>Enter Secret Password:
+      <label>
+        Enter Secret Password for 
+        <span class="display-role"></span> 
+        role:
         <input type="password" name="secretPass" id="secretPass">
       </label>
       <button type="submit">Submit</button>
     </form>
+
+    <script>
+      const roleSpan = document.querySelector(".display-role");
+      const options = document.querySelectorAll(".role-option");
+
+      const updateRoleSpan = (optionNode) => {
+        const value = optionNode.getAttribute("data-value");
+        roleSpan.textContent = value.charAt(0).toUpperCase() + value.slice(1);
+      }
+
+      const highlightRoleOption = (selectedOption) => {
+        const selectedOptionValue = selectedOption.getAttribute("data-value");
+        options.forEach((option) => {
+          const curOptionValue = option.getAttribute("data-value");
+          if (curOptionValue === selectedOptionValue) option.classList.add("active-option");
+          else option.classList.remove("active-option");
+        });
+      }
+
+      options.forEach((option) => option.addEventListener("click", () => {
+        updateRoleSpan(option);
+        highlightRoleOption(option);
+      }));
+    </script>
   </div>
 </body>
 </html>
