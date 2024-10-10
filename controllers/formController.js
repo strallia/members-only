@@ -50,8 +50,13 @@ const createUser = (req, res, next) => {
   })
 };
 
+const  getUpgradePage = (req, res) => {
+  res.render("forms/upgradeRole");
+}
+
 module.exports = {
   getSignupPage,
   validateSignupForm,
-  createUser
+  createUser,
+  getUpgradePage
 }
