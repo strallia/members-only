@@ -54,15 +54,15 @@ const  getUpgradePage = (req, res) => {
   res.render("forms/upgradeRole");
 }
 
-const verifyRoleUpgradePassword = async (req, res) => {
+const verifyRoleUpgradePassword = async (req, res, next) => {
   const { secretPass, role } = req.body;
   const databaseRolePass = await db.getRolePassword(role);
   if (secretPass !== databaseRolePass) return res.send("incorrect password");
-  res.send("correct password!");
+  next(); 
 }
 
 const upgradeRole = (req, res) => {
-  // 
+  res.render("home");
 };
 
 module.exports = {
