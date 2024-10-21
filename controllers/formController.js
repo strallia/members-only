@@ -65,11 +65,16 @@ const upgradeRole = (req, res) => {
   res.render("home");
 };
 
+const getLoginPage = (req, res) => {
+  res.render("forms/login");
+}
+
 module.exports = {
   getSignupPage,
   validateSignupForm,
   createUser,
   getUpgradePage,
   verifyRoleUpgradePassword,
-  upgradeRole
+  upgradeRole,
+  getLoginPage
 }
