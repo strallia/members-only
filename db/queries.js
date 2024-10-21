@@ -14,7 +14,16 @@ const createUser = async (first, last, email, hashedPassword) => {
   );
 };
 
+const getRolePassword = async (role) => {
+  const {rows} = await pool.query(
+    "SELECT password FROM role_passwords WHERE role = $1",
+    [role]
+  );
+  return rows[0].password;
+}
+
 module.exports = {
   getUser,
   createUser,
+  getRolePassword
 }

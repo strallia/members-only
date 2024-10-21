@@ -54,9 +54,22 @@ const  getUpgradePage = (req, res) => {
   res.render("forms/upgradeRole");
 }
 
+const verifyRoleUpgradePassword = async (req, res) => {
+  const { secretPass, role } = req.body;
+  const databaseRolePass = await db.getRolePassword(role);
+  if (secretPass !== databaseRolePass) return res.send("incorrect password");
+  res.send("correct password!");
+}
+
+const upgradeRole = (req, res) => {
+  // 
+};
+
 module.exports = {
   getSignupPage,
   validateSignupForm,
   createUser,
-  getUpgradePage
+  getUpgradePage,
+  verifyRoleUpgradePassword,
+  upgradeRole
 }

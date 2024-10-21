@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { Client } = require('pg');
 
-const { DATABASE_URL } = process.env;
+const { DATABASE_URL, ADMIN_PASS, PREMIUM_PASS } = process.env;
 
 const SQL = `
   CREATE TABLE IF NOT EXISTS users (
@@ -33,6 +33,16 @@ const SQL = `
     (1, 'Hello all!', NOW(), 'This is the first comment :)'),
     (2, 'FIRST!', NOW(), 'JK. Someone beat me to it :('),
     (3, 'Tis a Good Day', NOW(), 'Lorem ipsum and more random words.');
+  
+  CREATE TABLE IF NOT EXISTS role_passwords (
+    role TEXT,
+    password TEXT
+  );  
+
+  INSERT INTO role_passwords (role, password)
+  VALUES 
+    ('admin', '${ADMIN_PASS}'),
+    ('premium', '${PREMIUM_PASS}');
 `;
 
 const seedDB = async () => { 

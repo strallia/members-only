@@ -7,7 +7,8 @@ formRouter.get("/signup", formController.getSignupPage);
 formRouter.get("/upgrade", formController.getUpgradePage);
 
 // POST routes
-formRouter.post("/signup", formController.validateSignupForm, formController.createUser)
+formRouter.post("/signup", formController.validateSignupForm, formController.createUser);
+formRouter.post("/upgrade", formController.verifyRoleUpgradePassword, formController.upgradeRole);
 
 
 module.exports = formRouter;
