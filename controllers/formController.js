@@ -57,7 +57,9 @@ const  getUpgradePage = (req, res) => {
 const verifyRoleUpgradePassword = async (req, res, next) => {
   const { secretPass, role } = req.body;
   const databaseRolePass = await db.getRolePassword(role);
-  if (secretPass !== databaseRolePass) return res.send("incorrect password");
+  if (secretPass !== databaseRolePass) {
+    return res.render("forms/upgradeRole", { errors: [{msg: "Incorrect password"}]});
+  }
   next(); 
 }
 
