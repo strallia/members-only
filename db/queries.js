@@ -9,7 +9,7 @@ const getUser = async (username) => {
 
 const createUser = async (first, last, email, hashedPassword) => { 
   await pool.query(
-    "INSERT INTO users (first, last, email, passhash) VALUES ($1, $2, $3, $4)", 
+    "INSERT INTO users (first, last, email, passhash, is_premium, is_admin) VALUES ($1, $2, $3, $4, false, false)", 
     [first, last, email, hashedPassword]
   );
 };
