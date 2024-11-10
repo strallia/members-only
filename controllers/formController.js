@@ -1,6 +1,7 @@
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
+const passport = require("../configs/passport");
 
 const getSignupPage = (req, res) => { 
   res.render("forms/signup");
@@ -10,10 +11,10 @@ const validateSignupForm = [
   [
     body("first")
       .notEmpty().withMessage("First name cannot be empty")
-      .isLength({ max: 20 }).withMessage("First name cannot be more than 20 characters"),//
+      .isLength({ max: 20 }).withMessage("First name cannot be more than 20 characters"),
     body("last")
       .notEmpty().withMessage("Last name cannot be empty")
-      .isLength({ max: 20 }).withMessage("Last name cannot be more than 20 characters"),//
+      .isLength({ max: 20 }).withMessage("Last name cannot be more than 20 characters"),
     body("email")
       .notEmpty().withMessage("Email cannot be empty")
       .isEmail().withMessage("Please enter valid email address (e.g. first@last.com)"),
@@ -63,13 +64,25 @@ const verifyRoleUpgradePassword = async (req, res, next) => {
   next(); 
 }
 
-const upgradeRole = (req, res) => {
+const upgradeRole = async (req, res) => {
+  const { role } = req.body;
+  await db.upgradeRole(user_id, role);
   res.render("home");
 };
 
 const getLoginPage = (req, res) => {
   res.render("forms/login");
 }
+
+const loginUser = [
+  (req, res, next) => {console.log("post to /login req.user", req.user);next();},
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/form/login",
+    failureMessage: true,
+    successMessage: true
+  })
+];
 
 module.exports = {
   getSignupPage,
@@ -78,5 +91,6 @@ module.exports = {
   getUpgradePage,
   verifyRoleUpgradePassword,
   upgradeRole,
-  getLoginPage
+  getLoginPage,
+  loginUser,
 }

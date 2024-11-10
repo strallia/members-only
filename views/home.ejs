@@ -11,5 +11,12 @@
   <p>(Messages will render here)</p>
   <a href="form/signup"><button>Signup</button></a>
   <a href="form/login"><button>Login</button></a>
+  <% if (currentUser) { %>
+    <h1>Welcome, <%= currentUser.first %> <%= currentUser.last %>!</h1>
+    <p>Your email: <%= currentUser.email %></p>
+    <p>Role: <%= currentUser.role %></p>
+  <% } else { %>
+    <p>Please log in to access more features.</p>
+  <% } %>
 </body>
 </html>

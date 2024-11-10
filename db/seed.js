@@ -4,21 +4,22 @@ const { Client } = require('pg');
 const { DATABASE_URL, ADMIN_PASS, PREMIUM_PASS } = process.env;
 
 const SQL = `
+  CREATE TYPE role_types AS ENUM ('basic', 'premium', 'admin');
+
   CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     first TEXT,
     last TEXT,
     email TEXT,
     passhash TEXT,
-    is_premium BOOLEAN,
-    is_admin BOOLEAN
+    role role_types NOT NULL
   );
 
-  INSERT INTO users (first, last, email, is_premium, is_admin)
+  INSERT INTO users (first, last, email, role)
   VALUES 
-    ('Jane', 'Basic', 'jane@basic.com', false, false),
-    ('John', 'Premium', 'john@premium.com', true, false),
-    ('Jill', 'Admin', 'jill@admin.com', false, true);
+    ('Jane', 'Basic', 'jane@basic.com', 'basic'),
+    ('John', 'Premium', 'john@premium.com', 'premium'),
+    ('Jill', 'Admin', 'jill@admin.com', 'admin');
 
   CREATE TABLE IF NOT EXISTS messages (
     message_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
