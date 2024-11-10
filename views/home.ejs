@@ -17,7 +17,7 @@
     <% const { first, last, title, time, text } = message; %>
     <div class="message">
       <span>
-        <% if (currentUser) { %>
+        <% if (currentUser && currentUser.role !== "basic") { %>
           <%= first %> <%= last %> commented at <%= time %>
         <% } else { %>
           <strong>Hidden Author</strong> commented at <strong>Hidden Date</strong> 
