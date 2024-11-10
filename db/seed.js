@@ -23,13 +23,13 @@ const SQL = `
 
   CREATE TABLE IF NOT EXISTS messages (
     message_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    author_id INTEGER REFERENCES users(user_id),
+    user_id INTEGER REFERENCES users(user_id),
     title TEXT,
     time TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     text TEXT
   );  
 
-  INSERT INTO messages (author_id, title, time, text)
+  INSERT INTO messages (user_id, title, time, text)
   VALUES 
     (1, 'Hello all!', NOW(), 'This is the first comment :)'),
     (2, 'FIRST!', NOW(), 'JK. Someone beat me to it :('),

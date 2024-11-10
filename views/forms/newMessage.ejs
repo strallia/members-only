@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Message</title>
+</head>
+<body>
+  <h1>New Message</h1>
+  <%- include("../partials/errors") %>
+  <form method="post" action="/form/new-message">
+    <label>
+      Title:
+      <input type="text" name="title" id="title">
+    </label>
+    <label>
+      Text:
+      <textarea name="text" id="text"></textarea>
+    </label>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

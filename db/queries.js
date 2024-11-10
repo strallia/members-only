@@ -29,9 +29,17 @@ const upgradeRole = async (userID, role) => {
   );
 };
 
+const postNewMessage = async (userID, title, text) => {
+  await pool.query(
+    "INSERT INTO messages (user_id, title, text) VALUES ($1, $2, $3)", 
+    [userID, title, text]
+  );
+}
+
 module.exports = {
   getUser,
   createUser,
   getRolePassword,
-  upgradeRole
+  upgradeRole,
+  postNewMessage
 }

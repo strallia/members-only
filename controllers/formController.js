@@ -51,7 +51,7 @@ const createUser = (req, res, next) => {
   })
 };
 
-const  getUpgradePage = (req, res) => {
+const getUpgradePage = (req, res) => {
   res.render("forms/upgradeRole");
 }
 
@@ -85,6 +85,35 @@ const loginUser = [
   })
 ];
 
+const getNewMessagePage = (req, res) => {
+  res.render("forms/newMessage");
+}
+
+const validateNewMessageForm = [
+  [
+    body("title")
+      .notEmpty().withMessage("Title cannot be empty")
+      .isLength({ max: 30 }).withMessage("Title cannot be more than 30 characters"),
+    body("text")
+      .notEmpty().withMessage("Text cannot be empty")
+      .isLength({ max: 200 }).withMessage("Text cannot be more than 200 characters")
+  ], 
+  (req, res, next) => { 
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("forms/newMessage", { errors: errors.array(), ...req.body});
+    };
+    next();
+  }
+]
+
+const postNewMessage = async (req, res) => {
+  const { title, text } = req.body;
+  const { user_id } = req.user;  
+  await db.postNewMessage(user_id, title, text);
+  res.redirect("/");
+}
+
 module.exports = {
   getSignupPage,
   validateSignupForm,
@@ -94,4 +123,7 @@ module.exports = {
   upgradeRole,
   getLoginPage,
   loginUser,
+  getNewMessagePage,
+  validateNewMessageForm,
+  postNewMessage
 }
