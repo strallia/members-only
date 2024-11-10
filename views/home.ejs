@@ -29,9 +29,9 @@
   <% }) %>
   <a href="form/signup"><button>Signup</button></a>
   <a href="form/login"><button>Login</button></a>
-  <a href="form/upgrade"><button>Upgrade Role</button></a>
-  <a href="form/new-message"><button>Add a Message</button></a>
   <% if (currentUser) { %>
+    <a href="form/upgrade"><button>Upgrade Role</button></a>
+    <a href="form/new-message"><button>Add a Message</button></a>
     <h1>Welcome, <%= currentUser.first %> <%= currentUser.last %>!</h1>
     <p>Your email: <%= currentUser.email %></p>
     <p>Role: <%= currentUser.role %></p>
