@@ -27,8 +27,6 @@
       <p>text: <%= text %></p>
     </div>
   <% }) %>
-  <a href="form/signup"><button>Signup</button></a>
-  <a href="form/login"><button>Login</button></a>
   <% if (currentUser) { %>
     <a href="form/upgrade"><button>Upgrade Role</button></a>
     <a href="form/new-message"><button>Add a Message</button></a>
@@ -36,6 +34,8 @@
     <p>Your email: <%= currentUser.email %></p>
     <p>Role: <%= currentUser.role %></p>
   <% } else { %>
+    <a href="form/signup"><button>Signup</button></a>
+    <a href="form/login"><button>Login</button></a>
     <p>Please log in to access more features.</p>
   <% } %>
 </body>
