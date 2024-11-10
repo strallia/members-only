@@ -66,8 +66,9 @@ const verifyRoleUpgradePassword = async (req, res, next) => {
 
 const upgradeRole = async (req, res) => {
   const { role } = req.body;
-  await db.upgradeRole(user_id, role);
-  res.render("home");
+  const { user_id } = req.user;  
+  await db.upgradeRole( user_id, role);
+  res.redirect("/");
 };
 
 const getLoginPage = (req, res) => {

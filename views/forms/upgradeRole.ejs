@@ -18,7 +18,7 @@
   <div>
     <h1>Upgrade Account</h1>
     <p>Select the role you want</p>
-    <div class="role-option" data-value="premium">
+    <div class="role-option active-option" data-value="premium">
       <h3>Premium</h3>
       <ul>
         <li>See author and date</li>
@@ -33,10 +33,10 @@
     </div>
     <form action="/form/upgrade" method="post">
       <%- include("../partials/errors") %>
-      <input type="hidden" name="role" id="role" value="">
+      <input type="hidden" name="role" id="role" value="premium">
       <label>
         Enter Secret Password for 
-        <span class="display-role"></span> 
+        <span class="display-role">Premium</span> 
         role:
         <input type="password" name="secretPass" id="secretPass">
       </label>

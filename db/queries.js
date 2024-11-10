@@ -22,10 +22,10 @@ const getRolePassword = async (role) => {
   return rows[0].password;
 }
 
-const upgradeRole = async (userId, role) => { 
+const upgradeRole = async (userID, role) => { 
   await pool.query(
-    "UPDATE users SET role = $1 WHERE user_id = $3", 
-    [role, userId]
+    "UPDATE users SET role = $1 WHERE user_id = $2", 
+    [role, userID]
   );
 };
 
