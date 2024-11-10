@@ -36,10 +36,20 @@ const postNewMessage = async (userID, title, text) => {
   );
 }
 
+const getAllMessages = async () => {
+  const { rows } = await pool.query(`
+    SELECT first, last, title, time, text
+    FROM messages
+    JOIN users ON messages.user_id = users.user_id
+  `);
+  return rows;
+}
+
 module.exports = {
   getUser,
   createUser,
   getRolePassword,
   upgradeRole,
-  postNewMessage
+  postNewMessage,
+  getAllMessages
 }
