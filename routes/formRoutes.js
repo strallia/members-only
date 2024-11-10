@@ -14,4 +14,7 @@ formRouter.post("/login", formController.loginUser);
 formRouter.post("/upgrade", formController.verifyRoleUpgradePassword, formController.upgradeRole);
 formRouter.post("/new-message", formController.validateNewMessageForm, formController.postNewMessage);
 
+// DELETE routes
+formRouter.delete("/message/:messageID", formController.deleteMessage);
+
 module.exports = formRouter;

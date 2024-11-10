@@ -7,6 +7,7 @@
   <style>
     .message {
       background-color: lightgray;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -14,7 +15,7 @@
   <h1>Members Only</h1>
   <h3>Home Page</h3>
   <% locals.messages.forEach((message) => { %>
-    <% const { first, last, title, time, text } = message; %>
+    <% const { message_id, first, last, title, time, text } = message; %>
     <div class="message">
       <span>
         <% if (currentUser && currentUser.role !== "basic") { %>
@@ -25,6 +26,11 @@
       </span>
       <p><%= title %></p>
       <p>text: <%= text %></p>
+      <% if (currentUser && currentUser.role === "admin") { %>
+        <form action="/form/message/<%=message_id%>?_method=DELETE" method="POST">
+          <button type="submit">Delete</button>
+        </form>
+      <% } %>
     </div>
   <% }) %>
   <% if (currentUser) { %>

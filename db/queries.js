@@ -38,11 +38,18 @@ const postNewMessage = async (userID, title, text) => {
 
 const getAllMessages = async () => {
   const { rows } = await pool.query(`
-    SELECT first, last, title, time, text
+    SELECT message_id, first, last, title, time, text
     FROM messages
     JOIN users ON messages.user_id = users.user_id
   `);
   return rows;
+}
+
+const deleteMessage = async (messageID) => {
+  await pool.query(
+    "DELETE FROM messages WHERE message_id = $1",
+    [messageID]
+  )
 }
 
 module.exports = {
@@ -51,5 +58,6 @@ module.exports = {
   getRolePassword,
   upgradeRole,
   postNewMessage,
-  getAllMessages
+  getAllMessages,
+  deleteMessage
 }

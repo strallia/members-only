@@ -114,6 +114,12 @@ const postNewMessage = async (req, res) => {
   res.redirect("/");
 }
 
+const deleteMessage = async (req, res) => {
+  const { messageID } = req.params;
+  await db.deleteMessage(messageID);
+  res.redirect("/");
+}
+
 module.exports = {
   getSignupPage,
   validateSignupForm,
@@ -125,5 +131,6 @@ module.exports = {
   loginUser,
   getNewMessagePage,
   validateNewMessageForm,
-  postNewMessage
+  postNewMessage,
+  deleteMessage
 }

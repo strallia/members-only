@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const session = require("express-session");
 const passport = require("./configs/passport");
+const methodOverride = require("method-override");
 
 /**
  * Import routers
@@ -14,6 +15,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 /**
  * Configure passport authentication
