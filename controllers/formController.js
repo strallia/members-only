@@ -44,7 +44,7 @@ const createUser = (req, res, next) => {
     const {first, last, email} = req.body;
     try {
       await db.createUser(first, last, email, hashedPassword);
-      res.redirect("/");
+      next();
     } catch (err) {
       return next(err);
     }
@@ -81,7 +81,6 @@ const getLoginPage = (req, res) => {
 }
 
 const loginUser = [
-  (req, res, next) => {console.log("post to /login req.user", req.user);next();},
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/form/login",

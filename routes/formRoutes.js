@@ -9,7 +9,7 @@ formRouter.get("/upgrade", formController.getUpgradePage);
 formRouter.get("/new-message", formController.getNewMessagePage);
 
 // POST routes
-formRouter.post("/signup", formController.validateSignupForm, formController.createUser);
+formRouter.post("/signup", formController.validateSignupForm, formController.createUser, formController.loginUser);
 formRouter.post("/login", formController.loginUser);
 formRouter.post("/upgrade", formController.verifyRoleUpgradePassword, formController.upgradeRole);
 formRouter.post("/new-message", formController.validateNewMessageForm, formController.postNewMessage);
