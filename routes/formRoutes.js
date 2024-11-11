@@ -13,6 +13,7 @@ formRouter.post("/signup", formController.validateSignupForm, formController.cre
 formRouter.post("/login", formController.loginUser);
 formRouter.post("/upgrade", formController.verifyRoleUpgradePassword, formController.upgradeRole);
 formRouter.post("/new-message", formController.validateNewMessageForm, formController.postNewMessage);
+formRouter.post("/logout", formController.logoutUser);
 
 // DELETE routes
 formRouter.delete("/message/:messageID", formController.deleteMessage);

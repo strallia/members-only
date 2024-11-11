@@ -120,6 +120,13 @@ const deleteMessage = async (req, res) => {
   res.redirect("/");
 }
 
+const logoutUser = async (req, res) => {
+  req.logout((err) =>  {
+    if (err) { return next(err); }
+    res.redirect("/");
+  });
+}
+
 module.exports = {
   getSignupPage,
   validateSignupForm,
@@ -132,5 +139,6 @@ module.exports = {
   getNewMessagePage,
   validateNewMessageForm,
   postNewMessage,
-  deleteMessage
+  deleteMessage,
+  logoutUser
 }

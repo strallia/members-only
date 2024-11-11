@@ -19,7 +19,7 @@
     <div class="message">
       <span>
         <% if (currentUser && currentUser.role !== "basic") { %>
-          <%= first %> <%= last %> commented at <%= time %>
+          <strong><%= first %> <%= last %></strong> commented at <strong><%= time %></strong>
         <% } else { %>
           <strong>Hidden Author</strong> commented at <strong>Hidden Date</strong> 
         <% } %>
@@ -36,6 +36,9 @@
   <% if (currentUser) { %>
     <a href="form/upgrade"><button>Upgrade Role</button></a>
     <a href="form/new-message"><button>Add a Message</button></a>
+    <form action="/form/logout" method="POST">
+      <button type="submit">Logout</button>
+    </form>
     <h1>Welcome, <%= currentUser.first %> <%= currentUser.last %>!</h1>
     <p>Your email: <%= currentUser.email %></p>
     <p>Role: <%= currentUser.role %></p>
