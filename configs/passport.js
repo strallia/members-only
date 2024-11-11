@@ -12,15 +12,12 @@ passport.use(new LocalStrategy({
     console.log("passport verifying login credentials using username and password:"), username, password; 
     try {
       // Authentication logic
-      // Checks that user-entered password matches hashed passwored in database
       const user = await db.getUser(username);
       if (!user) { 
-        console.log("incorrect username"); 
-        return done(null, false, {message: "Incorrect username"});
+        return done(null, false, {message: "No account found with that username"});
       }
       const passwordsMatch = await bcrypt.compare(password, user.passhash)
       if (!passwordsMatch) {
-        console.log("incorrect password"); 
         return done(null, false, {message: "Incorrect password"});
       }
       return done(null, user);

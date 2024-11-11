@@ -59,7 +59,7 @@ const verifyRoleUpgradePassword = async (req, res, next) => {
   const { secretPass, role } = req.body;
   const databaseRolePass = await db.getRolePassword(role);
   if (secretPass !== databaseRolePass) {
-    return res.render("forms/upgradeRole", { errors: [{msg: "Incorrect password"}]});
+    return res.render("forms/upgradeRole", { errors: [{msg: "Incorrect password"}] });
   }
   next(); 
 }
@@ -72,6 +72,11 @@ const upgradeRole = async (req, res) => {
 };
 
 const getLoginPage = (req, res) => {
+  const { messages: errMessages } = req.session;
+  if (errMessages) {
+    req.session.messages = [];
+    return res.render("forms/login", { errors: [{msg: errMessages[0]}] });
+  }
   res.render("forms/login");
 }
 
@@ -81,7 +86,6 @@ const loginUser = [
     successRedirect: "/",
     failureRedirect: "/form/login",
     failureMessage: true,
-    successMessage: true
   })
 ];
 
