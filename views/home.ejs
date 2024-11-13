@@ -4,48 +4,74 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
-  <style>
-    .message {
-      background-color: lightgray;
-      margin-bottom: 10px;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Members Only</h1>
-  <h3>Home Page</h3>
-  <% locals.messages.forEach((message) => { %>
-    <% const { message_id, first, last, title, time, text } = message; %>
-    <div class="message">
-      <span>
-        <% if (currentUser && currentUser.role !== "basic") { %>
-          <strong><%= first %> <%= last %></strong> commented at <strong><%= time %></strong>
-        <% } else { %>
-          <strong>Hidden Author</strong> commented at <strong>Hidden Date</strong> 
-        <% } %>
-      </span>
-      <p><%= title %></p>
-      <p>text: <%= text %></p>
-      <% if (currentUser && currentUser.role === "admin") { %>
-        <form action="/form/message/<%=message_id%>?_method=DELETE" method="POST">
-          <button type="submit">Delete</button>
+  <header>
+    <h1>Members Only</h1>
+    <div class="buttons-container position-absolute">
+      <% if (currentUser) { %>
+        <a href="form/upgrade">
+          <button class="tertiary">
+            <img src="/icons/person.svg" alt="person icon" class="icon">
+            <%= currentUser.role %>
+          </button>
+        </a>
+        <form action="/form/logout" method="POST">
+          <button type="submit" class="primary">Logout</button>
         </form>
+      <% } else { %>
+          <a href="form/signup"><button class="secondary">Signup</button></a>
+          <a href="form/login"><button class="primary">Login</button></a>
       <% } %>
     </div>
-  <% }) %>
-  <% if (currentUser) { %>
-    <a href="form/upgrade"><button>Upgrade Role</button></a>
-    <a href="form/new-message"><button>Add a Message</button></a>
-    <form action="/form/logout" method="POST">
-      <button type="submit">Logout</button>
-    </form>
-    <h1>Welcome, <%= currentUser.first %> <%= currentUser.last %>!</h1>
-    <p>Your email: <%= currentUser.email %></p>
-    <p>Role: <%= currentUser.role %></p>
-  <% } else { %>
-    <a href="form/signup"><button>Signup</button></a>
-    <a href="form/login"><button>Login</button></a>
-    <p>Please log in to access more features.</p>
-  <% } %>
+  </header>
+  <main>
+    <div class="messages-container">
+      <% locals.messages.forEach((message) => { %>
+        <% const { message_id, first, last, title, time, text } = message; %>
+        <div class="message">
+          <span class="sub-details">
+            <% if (currentUser && currentUser.role !== "basic") { %>
+              <strong><%= first %> <%= last %></strong> commented at <strong><%= time %></strong>
+            <% } else { %>
+              <strong>Hidden Author</strong> commented at <strong>Hidden Date</strong>
+            <% } %>
+          </span>
+          <div class="content">
+            <h4 class="title"><%= title %></h4>
+            <p><%= text %></p>
+            <% if (currentUser && currentUser.role === "admin") { %>
+              <form action="/form/message/<%=message_id%>?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+      <% }) %>
+      <div class="horiz-line"></div>
+      <% if (currentUser) { %>
+        <div class="message">
+          <span class="sub-details">
+            <strong>Add a comment</strong>
+          </span>
+          <div class="content">
+            <h4 class="title">Add a Title</h4>
+            <p>Type your message here...</p>
+            <a href="form/new-message"><button>Add a Message</button></a>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="dialog">
+          <h4>Want to write a comment?</h4>
+          <p>Create an account or login to join the conversation!</p>
+          <div class="buttons-container">
+            <a href="form/signup"><button class="secondary">Signup</button></a>
+            <a href="form/login"><button class="primary">Login</button></a>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </main>
 </body>
 </html>

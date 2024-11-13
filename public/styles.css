@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --light-gray: #F3F3F3;
+  --white: #FFF;
+  --gray: #C5C5C5;
+  --charcoal: #262347; 
+  --purple: 100, 88, 237;
+  font-family: 'Open Sans';
+  font-size: 16px;
+  color: var(--charcoal);
+}
+
+body {
+  background-color: var(--light-gray);
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 1fr;
+}
+
+header {
+  padding: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+/* HOME */
+.messages-container {
+  display: grid;
+  row-gap: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  grid-template-columns: minmax(150px, 500px);
+}
+
+.message {
+  min-width: 100%;
+  display: grid;
+  gap: 5px;
+}
+
+.message > .content {
+  background-color: var(--white);
+  border-radius: 20px;
+  padding: 15px;
+  width: 100%;
+  display: grid;
+  gap: 5px;
+}
+
+.message > .sub-details {
+  font-size: 0.8rem;
+}
+
+.message > .sub-details > strong {
+  color: var(--gray);
+}
+
+.message .title {
+  text-transform: capitalize;
+}
+
+.horiz-line {
+  height: 2px;
+  background-color: rgba(var(--purple), 0.2);
+}
+
+.dialog {
+  background-color: rgba(var(--purple), 0.1);
+  border-radius: 20px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+}
+
+.dialog > .buttons-container {
+  justify-self: end;
+  padding-top: 20px;
+}
+
+/* BUTTONS */
+.buttons-container {
+  display: flex;
+  gap: 10px;
+  right: 20px;
+}
+
+button {
+  border-radius: 100px;
+  padding: 10px 20px;
+  border: none;
+  text-transform: capitalize;
+  display: flex;
+  gap: 5px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+a:has(button) {
+  text-decoration: none;
+}
+
+button.primary {
+  background-color: rgba(var(--purple), 1);
+  color: var(--white);
+}
+
+button.primary:hover {
+  box-shadow: 0 0 5px var(--charcoal);
+}
+
+button.primary:active {
+  box-shadow: none;
+}
+
+button.secondary {
+  background-color: rgba(var(--purple), 0.2);
+}
+
+button.secondary:hover {
+  background-color: rgba(var(--purple), 0.1);
+}
+
+button.secondary:active {
+  background-color: rgba(var(--purple), 0.2);
+}
+
+button.tertiary {
+  background-color: transparent;
+  border: 1px solid rgba(var(--purple), 1);
+  color: rgba(var(--purple), 1);
+}
+
+button.tertiary:hover {
+  background-color: rgba(var(--purple), 0.1);
+}
+
+button.tertiary:active {
+  background-color: rgba(var(--purple), 0.2);
+}
+
+/* ICONS */
+.icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* TABLET SIZE */
+@media (max-width: 800px) {
+  header > h1 {
+    justify-self: start;
+  }
+}
+
+
+
