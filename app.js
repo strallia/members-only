@@ -3,6 +3,7 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("./configs/passport");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
 
 /**
  * Import routers
@@ -16,6 +17,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 app.use(methodOverride("_method"));
+app.use(flash());
 
 /**
  * Configure passport authentication

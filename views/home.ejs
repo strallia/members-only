@@ -51,16 +51,7 @@
       <% }) %>
       <div class="horiz-line"></div>
       <% if (currentUser) { %>
-        <div class="message">
-          <span class="sub-details">
-            <strong>Add a comment</strong>
-          </span>
-          <div class="content">
-            <h4 class="title">Add a Title</h4>
-            <p>Type your message here...</p>
-            <a href="form/new-message"><button>Add a Message</button></a>
-          </div>
-        </div>
+        <%- include("./forms/newMessage", { errors: locals.addMessageErrors }) %>
       <% } else { %>
         <div class="dialog">
           <h4>Want to write a comment?</h4>

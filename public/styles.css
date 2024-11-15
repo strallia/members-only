@@ -33,8 +33,15 @@ header {
   justify-items: center;
 }
 
+/* GENERAL STYLES */
 .position-absolute {
   position: absolute;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
 }
 
 /* HOME */
@@ -156,11 +163,70 @@ button.tertiary:active {
   background-color: rgba(var(--purple), 0.2);
 }
 
+button.icon-button {
+  background-color: transparent;
+  padding: 10px;
+}
+
+button.icon-button:hover {
+  background-color: var(--light-gray);
+}
+
+button.icon-button:active {
+  background-color: var(--gray);
+}
+
 /* ICONS */
 .icon {
   width: 15px;
   height: 15px;
 }
+
+/* NEW MESSAGE FORM */
+.new-message > .sub-details > strong {
+  color: var(--charcoal);
+}
+
+.new-message .content {
+  position: relative;
+}
+
+.new-message input,
+.new-message textarea {
+  border: none;
+  padding: 5px;
+  margin: 0 -5px;
+}
+
+.new-message input {
+  color: black;
+  font-weight: 700;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.new-message textarea {
+  font-family: inherit;
+  font-size: 16px;
+  resize: none;
+}
+
+.new-message label {
+  visibility: hidden;
+}
+
+.new-message input:focus,
+.new-message textarea:focus {
+  outline-color: rgba(var(--purple), 1);
+}
+
+.new-message button {
+  justify-self: end;
+  bottom: 20px;
+  right: 15px;
+
+}
+
 
 /* TABLET SIZE */
 @media (max-width: 800px) {

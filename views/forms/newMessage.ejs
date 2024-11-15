@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Message</title>
-</head>
-<body>
-  <h1>New Message</h1>
+<div class="message new-message">
+  <span class="sub-details">
+    <strong>Add a comment</strong>
+  </span>
   <%- include("../partials/errors") %>
-  <form method="post" action="/form/new-message">
-    <label>
-      Title:
-      <input type="text" name="title" id="title">
-    </label>
-    <label>
-      Text:
-      <textarea name="text" id="text"></textarea>
-    </label>
-    <button type="submit">Submit</button>
+  <form method="post" action="/form/new-message" class="content">
+    <label for="title" class="visually-hidden">Add a title</label>
+    <input type="text" name="title" id="title" placeholder="Add a Title">
+    <label for="text" class="visually-hidden">Type your message here...</label>
+    <textarea name="text" id="text" placeholder="Type your message here..."></textarea>
+    <button type="submit" class="icon-button position-absolute"><img src="/icons/send.svg" alt="send message" class="icon"></button>
   </form>
-</body>
-</html>
+</div>

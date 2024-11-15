@@ -104,7 +104,8 @@ const validateNewMessageForm = [
   (req, res, next) => { 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render("forms/newMessage", { errors: errors.array(), ...req.body});
+      req.flash('addMessageErrors', errors.array());
+      return res.redirect("/");
     };
     next();
   }
