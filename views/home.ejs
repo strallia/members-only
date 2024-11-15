@@ -33,13 +33,13 @@
         <div class="message">
           <span class="sub-details">
             <% if (currentUser && currentUser.role !== "basic") { %>
-              <strong><%= first %> <%= last %></strong> commented at <strong><%= time %></strong>
+              <strong class="capitalize"><%= first %> <%= last %></strong> commented at <strong><%= time %></strong>
             <% } else { %>
-              <strong>Hidden Author</strong> commented at <strong>Hidden Date</strong>
+              <strong class="gray-text capitalize">Hidden Author</strong> commented at <strong class="gray-text">Hidden Date</strong>
             <% } %>
           </span>
           <div class="content">
-            <h4 class="title"><%= title %></h4>
+            <h4 class="capitalize"><%= title %></h4>
             <p><%= text %></p>
             <% if (currentUser && currentUser.role === "admin") { %>
               <form action="/form/message/<%=message_id%>?_method=DELETE" method="POST">

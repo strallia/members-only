@@ -73,11 +73,11 @@ header {
   font-size: 0.8rem;
 }
 
-.message > .sub-details > strong {
+.message > .sub-details > .gray-text {
   color: var(--gray);
 }
 
-.message .title {
+.message .capitalize {
   text-transform: capitalize;
 }
 
