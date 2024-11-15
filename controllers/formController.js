@@ -88,10 +88,6 @@ const loginUser = [
   })
 ];
 
-const getNewMessagePage = (req, res) => {
-  res.render("forms/newMessage");
-}
-
 const validateNewMessageForm = [
   [
     body("title")
@@ -140,7 +136,6 @@ module.exports = {
   upgradeRole,
   getLoginPage,
   loginUser,
-  getNewMessagePage,
   validateNewMessageForm,
   postNewMessage,
   deleteMessage,
