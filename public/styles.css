@@ -12,6 +12,7 @@
   --gray: #C5C5C5;
   --charcoal: #262347; 
   --purple: 100, 88, 237;
+  --red: #F55858;
   font-family: 'Open Sans';
   font-size: 16px;
   color: var(--charcoal);
@@ -284,6 +285,12 @@ textarea:focus {
 
 .card .login-redirect {
   font-size: 0.9rem;
+}
+
+/* FORM ERRORS */
+.errors-container {
+  font-size: 0.9rem;
+  color: var(--red);
 }
 
 /* TABLET SIZE */
