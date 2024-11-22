@@ -4,32 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <h1>Signup</h1>
-  <%- include("../partials/errors") %>
-  <form method="post" action="/form/signup">
-    <label>
-      First:
-      <input type="text" name="first" id="first" >
-    </label>
-    <label>
-      Last:
-      <input type="text" name="last" id="last" >
-    </label>
-    <label>
-      Email:
-      <input type="email" name="email" id="email" >
-    </label>
-    <label>
-      Password:
-      <input type="password" name="password" id="password" >
-    </label>
-    <label>
-      Confirm Password:
-      <input type="password" name="confirm_password" id="confirm_password" >
-    </label>
-    <button type="submit">Submit</button>
-  </form>
+  <header>
+    <h1>Members Only</h1>
+  </header>
+  <div class="card">
+    <h1>Signup</h1>
+    <%- include("../partials/errors") %>
+    <form method="post" action="/form/signup">
+      <label>
+        First
+        <input type="text" name="first" id="first" >
+      </label>
+      <label>
+        Last
+        <input type="text" name="last" id="last" >
+      </label>
+      <label class="email-label">
+        Email
+        <input type="email" name="email" id="email" >
+      </label>
+      <label class="password-label">
+        Password
+        <input type="password" name="password" id="password" >
+      </label>
+      <label class="confirm-password-label">
+        Confirm Password
+        <input type="password" name="confirm_password" id="confirm_password" >
+      </label>
+      <p class="login-redirect">Already a member? <a href="/form/login">Login here</a></p>
+      <button type="submit" class="primary">Submit</button>
+    </form>
+  </div>
 </body>
 </html>
