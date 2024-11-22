@@ -4,43 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Upgrade Role</title>
-  <style type="text/css">
-    .role-option {
-      cursor: pointer;
-    }
-    .active-option, 
-    .role-option:hover{
-      background-color: lightgray;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div>
+  <header>
+    <h1>Members Only</h1>
+  </header>
+  <div class="card upgrade-role">
     <h1>Upgrade Account</h1>
     <p>Select the role you want</p>
-    <div class="role-option active-option" data-value="premium">
-      <h3>Premium</h3>
-      <ul>
-        <li>See author and date</li>
-      </ul>
-    </div>
-    <div class="role-option" data-value="admin">
-      <h3>Admin</h3>
-      <ul>
-        <li>See author and date</li>
-        <li>Delete comments</li>
-      </ul>
+    <div class="role-options-container">
+      <div class="role-option active-option" data-value="premium">
+        <img src="/icons/star.svg" alt="star icon" class="icon large">
+        <h3>Premium</h3>
+        <ul>
+          <li>See author and date</li>
+        </ul>
+      </div>
+      <div class="role-option" data-value="admin">
+        <img src="/icons/gear.svg" alt="gear icon" class="icon large">
+        <h3>Admin</h3>
+        <ul>
+          <li>See author and date</li>
+          <li>Delete comments</li>
+        </ul>
+      </div>
     </div>
     <form action="/form/upgrade" method="post">
       <%- include("../partials/errors") %>
       <input type="hidden" name="role" id="role" value="premium">
-      <label>
-        Enter Secret Password for 
-        <span class="display-role">Premium</span> 
-        role:
+      <label class="secret-password-label">
+        <div>
+          Enter Secret Password for
+          <span class="display-role">Premium</span>
+          role
+        </div>
         <input type="password" name="secretPass" id="secretPass">
       </label>
-      <button type="submit">Submit</button>
+      <button type="submit" class="primary">Submit</button>
     </form>
 
     <script>
