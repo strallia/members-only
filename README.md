@@ -3,12 +3,18 @@
 <!-- [Live Demo]() -->
 
 ![Home page](./public/images/unauthenticated.png)
-![Signup form](./public/images/signup.png)
-![Login form](./public/images/login.png)
-![Upgrade role form](./public/images/upgrade-role.png)
-![Basic user](./public/images/basic-user.png)
-![Premium user](./public/images/premium-user.png)
-![Admin user](./public/images/admin-user.png)
+
+## Forms
+
+Login | Signup | Upgrade Role
+:-------------------------:|:-------------------------:|:-------------------------:
+![Login form](./public/images/login.png)|![Signup form](./public/images/signup.png)|![Upgrade role form](./public/images/upgrade-role.png)
+
+## User Role Views
+
+Basic | Premium | Admin
+:-------------------------:|:-------------------------:|:-------------------------:
+![Basic user](./public/images/basic-user.png)|![Premium user](./public/images/premium-user.png)|![Admin user](./public/images/admin-user.png)
 
 ## Purpose
 
