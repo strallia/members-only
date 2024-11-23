@@ -79,7 +79,7 @@ header {
   align-items: center;
 }
 
-.message > .sub-details > .gray-text {
+.message > .sub-details .gray-text {
   color: var(--gray);
 }
 
