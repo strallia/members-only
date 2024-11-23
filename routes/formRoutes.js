@@ -5,7 +5,7 @@ const formController = require('../controllers/formController');
 // GET routes
 formRouter.get("/signup", formController.getSignupPage);
 formRouter.get("/login", formController.getLoginPage);
-formRouter.get("/upgrade", formController.getUpgradePage);
+formRouter.get("/upgrade", formController.checkAuthentication, formController.getUpgradePage);
 
 // POST routes
 formRouter.post("/signup", formController.validateSignupForm, formController.createUser, formController.loginUser);

@@ -127,6 +127,14 @@ const logoutUser = async (req, res) => {
   });
 }
 
+const checkAuthentication = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.redirect("/form/login");
+  }
+}
+
 module.exports = {
   getSignupPage,
   validateSignupForm,
@@ -139,5 +147,6 @@ module.exports = {
   validateNewMessageForm,
   postNewMessage,
   deleteMessage,
-  logoutUser
+  logoutUser,
+  checkAuthentication
 }
