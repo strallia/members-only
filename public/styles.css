@@ -74,6 +74,9 @@ header {
 
 .message > .sub-details {
   font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .message > .sub-details > .gray-text {
@@ -118,6 +121,7 @@ button {
   display: flex;
   gap: 5px;
   font-family: inherit;
+  align-items: center;
 }
 
 button:hover {
@@ -178,6 +182,17 @@ button.icon-button:hover {
 
 button.icon-button:active {
   background-color: var(--gray);
+}
+
+button.delete {
+  color: var(--red);
+  background-color: transparent;
+  font-weight: 600;
+  padding: 3px 10px;
+}
+
+button.delete:hover {
+  text-decoration: underline;
 }
 
 /* ICONS */

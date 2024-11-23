@@ -32,20 +32,22 @@
         <% const { message_id, first, last, title, time, text } = message; %>
         <div class="message">
           <span class="sub-details">
-            <% if (currentUser && currentUser.role !== "basic") { %>
-              <strong class="capitalize"><%= first %> <%= last %></strong> commented at <strong><%= time %></strong>
-            <% } else { %>
-              <strong class="gray-text capitalize">Hidden Author</strong> commented at <strong class="gray-text">Hidden Date</strong>
+            <div>
+              <% if (currentUser && currentUser.role !== "basic") { %>
+                <strong class="capitalize"><%= first %> <%= last %></strong> commented at <strong><%= time %></strong>
+              <% } else { %>
+                <strong class="gray-text capitalize">Hidden Author</strong> commented at <strong class="gray-text">Hidden Date</strong>
+              <% } %>
+            </div>
+            <% if (currentUser && currentUser.role === "admin") { %>
+              <form action="/form/message/<%=message_id%>?_method=DELETE" method="POST">
+                <button type="submit" class="delete">Delete</button>
+              </form>
             <% } %>
           </span>
           <div class="content">
             <h4 class="capitalize"><%= title %></h4>
             <p><%= text %></p>
-            <% if (currentUser && currentUser.role === "admin") { %>
-              <form action="/form/message/<%=message_id%>?_method=DELETE" method="POST">
-                <button type="submit">Delete</button>
-              </form>
-            <% } %>
           </div>
         </div>
       <% }) %>
