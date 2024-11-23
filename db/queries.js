@@ -37,12 +37,41 @@ const postNewMessage = async (userID, title, text) => {
 }
 
 const getAllMessages = async () => {
-  const { rows } = await pool.query(`
+  const { rows: messages } = await pool.query(`
     SELECT message_id, first, last, title, time, text
     FROM messages
     JOIN users ON messages.user_id = users.user_id
   `);
-  return rows;
+
+  const messagesWithFormattedDates = messages.map((message) => {
+    const isoDate = message.time;
+    let monthNum = isoDate.getMonth();
+    const day = isoDate.getDate();
+    const year = isoDate.getFullYear();
+    const hour24 = isoDate.getHours();
+    const hour12 = hour24 > 12 ? hour24 - 12 : hour24;
+    const minute = isoDate.getMinutes();
+    const ampm = hour24 >= 12 ? "PM" : "AM";
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+    const month = months[monthNum];
+    const dateString = `${month} ${day}, ${year} at ${hour12}:${minute}${ampm}`;
+    return { ...message, time: dateString };
+  });
+
+  return messagesWithFormattedDates;
 }
 
 const deleteMessage = async (messageID) => {
