@@ -17,7 +17,7 @@ class Database {
       else whereClause += `, ${value} =  $${index + 1}`;
     })
 
-    return `SELECT ${columns} FROM ${tableName} ${joinClause} ${whereValues.length > 0 ? whereClause: ""}`
+    return `SELECT ${columns} FROM ${tableName} ${joinTable ? joinClause: ""} ${whereValues.length > 0 ? whereClause: ""}`
   }
 
   insertInto(tableName = "", columns = "", numOfValues = 0) {
@@ -129,8 +129,17 @@ class Messages extends Database {
   }
 }
 
+class RolePasswords extends Database {
+  async getRolePassword(role) {
+    const sql = super.select("password", "role_passwords", ["role"]);
+    const data = await super.query(sql, [role]);
+    return data[0].password;
+  }
+}
+
 
 module.exports = {
   users: new Users(),
   messages: new Messages(),
+  rolePasswords: new RolePasswords()
 }
