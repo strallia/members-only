@@ -9,7 +9,6 @@ passport.use(new LocalStrategy({
     passwordField: "password"
   },
   async (username, password, done) => {
-    console.log("passport verifying login credentials using username and password:"), username, password; 
     try {
       // Authentication logic
       const user = await Users.getUser(username);
@@ -28,12 +27,10 @@ passport.use(new LocalStrategy({
 ));
 
 passport.serializeUser((user, done) => {
-  console.log("passport serializing user with user object:", user);
   done(null, user.user_id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  console.log("passport deserializing user");
   try {
     const {rows} = await pool.query("SELECT * FROM users WHERE user_id = $1", [id]);
     const user = rows[0];
