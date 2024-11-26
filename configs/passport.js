@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
-const db = require("../db/queries");
+const { Users } = require("../db/orm-practice");
 const pool = require("../db/pool");
 
 passport.use(new LocalStrategy({
@@ -12,7 +12,7 @@ passport.use(new LocalStrategy({
     console.log("passport verifying login credentials using username and password:"), username, password; 
     try {
       // Authentication logic
-      const user = await db.getUser(username);
+      const user = await Users.getUser(username);
       if (!user) { 
         return done(null, false, {message: "No account found with that username"});
       }

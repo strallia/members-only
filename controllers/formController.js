@@ -1,4 +1,4 @@
-const db = require("../db/queries");
+const { Users, Messages, RolePasswords } = require("../db/orm-practice");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 const passport = require("../configs/passport");
@@ -43,7 +43,7 @@ const createUser = (req, res, next) => {
     if (err) return next(err);
     const {first, last, email} = req.body;
     try {
-      await db.createUser(first, last, email, hashedPassword);
+      await Users.createUser(first, last, email, hashedPassword);
       next();
     } catch (err) {
       return next(err);
@@ -57,7 +57,7 @@ const getUpgradePage = (req, res) => {
 
 const verifyRoleUpgradePassword = async (req, res, next) => {
   const { secretPass, role } = req.body;
-  const databaseRolePass = await db.getRolePassword(role);
+  const databaseRolePass = await RolePasswords.getRolePassword(role);
   if (secretPass !== databaseRolePass) {
     return res.render("forms/upgradeRole", { errors: [{msg: "Incorrect password"}] });
   }
@@ -67,7 +67,7 @@ const verifyRoleUpgradePassword = async (req, res, next) => {
 const upgradeRole = async (req, res) => {
   const { role } = req.body;
   const { user_id } = req.user;  
-  await db.upgradeRole( user_id, role);
+  await Users.upgradeRole( user_id, role);
   res.redirect("/");
 };
 
@@ -110,13 +110,13 @@ const validateNewMessageForm = [
 const postNewMessage = async (req, res) => {
   const { title, text } = req.body;
   const { user_id } = req.user;  
-  await db.postNewMessage(user_id, title, text);
+  await Messages.postNewMessage(user_id, title, text);
   res.redirect("/");
 }
 
 const deleteMessage = async (req, res) => {
   const { messageID } = req.params;
-  await db.deleteMessage(messageID);
+  await Messages.deleteMessage(messageID);
   res.redirect("/");
 }
 

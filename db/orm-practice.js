@@ -139,7 +139,7 @@ class RolePasswords extends Database {
 
 
 module.exports = {
-  users: new Users(),
-  messages: new Messages(),
-  rolePasswords: new RolePasswords()
+  Users: new Users(),
+  Messages: new Messages(),
+  RolePasswords: new RolePasswords()
 }
