@@ -12,7 +12,7 @@ const SQL = `
     last TEXT,
     email TEXT,
     passhash TEXT,
-    role role_types NOT NULL
+    role role_types NOT NULL DEFAULT 'basic'
   );
 
   INSERT INTO users (first, last, email, role)
