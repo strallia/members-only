@@ -1,6 +1,11 @@
 const pool = require('./pool');
 
 class Database {
+  async query(sql = "", sanitizeInputs = []) {
+    const {rows} = await pool.query(sql, sanitizeInputs);
+    return rows[0];
+  }
+
   select(columns = "", tableName = "", whereValues = [] ) {
     // Generate WHERE clause
     let whereClause = "";
@@ -45,25 +50,20 @@ class Database {
 }
 
 class Users extends Database {
-  async query(sql = "", sanitizeInputs = []) {
-    const {rows} = await pool.query(sql, sanitizeInputs);
-    return rows[0];
-  }
-
   async getUser(username) {
     const sql = super.select("*", "users", ['email']);
-    const res = await this.query(sql, [username]);
+    const res = await super.query(sql, [username]);
     return res;
   }
 
   async createUser(first, last, email, hashedPassword) {
     const sql = super.insertInto("users", "(first, last, email, passhash)", arguments.length);
-    await this.query(sql, [first, last, email, hashedPassword]);
+    await super.query(sql, [first, last, email, hashedPassword]);
   };
 
   async upgradeRole (userID, role) { 
     const sql = super.update("users", ['role'], ["user_id"]);
-    await this.query(sql, [role, userID]);
+    await super.query(sql, [role, userID]);
   };
 }
 
