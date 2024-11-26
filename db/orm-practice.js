@@ -50,6 +50,17 @@ class Database {
 
     return `UPDATE ${tableName} SET ${setClause} WHERE ${whereClause}`
   }
+
+  deleteFrom(tableName = "", whereValues = []) {
+    // Generate WHERE clause
+    let whereClause = "WHERE ";
+    whereValues.forEach((value, index) => {
+      if (index === 0) whereClause += `${value} = $${index + 1}`
+      else whereClause += `, ${value} =  $${index + 1}`;
+    })
+
+    return `DELETE FROM ${tableName} ${whereClause}`;
+  }
 }
 
 class Users extends Database {
@@ -111,6 +122,11 @@ class Messages extends Database {
     const sql = super.insertInto("messages", "(user_id, title, text)", 3);
     await super.query(sql, [userID, title, text]);
   } 
+
+  async deleteMessage(messageID) {
+    const sql = super.deleteFrom("messages", ['message_id']);
+    await super.query(sql, [messageID]);
+  }
 }
 
 

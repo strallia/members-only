@@ -8,14 +8,6 @@ const getRolePassword = async (role) => {
   return rows[0].password;
 }
 
-const deleteMessage = async (messageID) => {
-  await pool.query(
-    "DELETE FROM messages WHERE message_id = $1",
-    [messageID]
-  )
-}
-
 module.exports = {
   getRolePassword,
-  deleteMessage
 }
