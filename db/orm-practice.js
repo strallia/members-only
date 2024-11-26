@@ -2,19 +2,22 @@ const pool = require('./pool');
 
 class Database {
   async query(sql = "", sanitizeInputs = []) {
-    const {rows} = await pool.query(sql, sanitizeInputs);
-    return rows[0];
+    const {rows: data} = await pool.query(sql, sanitizeInputs);
+    return data;
   }
 
-  select(columns = "", tableName = "", whereValues = [] ) {
+  select(columns = "", tableName = "", whereValues = [], joinTable = "", joinOn = "" ) {
+    // Generate JOIN clause
+    let joinClause = `JOIN ${joinTable} ON ${joinOn}`;
+
     // Generate WHERE clause
-    let whereClause = "";
+    let whereClause = "WHERE ";
     whereValues.forEach((value, index) => {
       if (index === 0) whereClause += `${value} = $${index + 1}`
       else whereClause += `, ${value} =  $${index + 1}`;
     })
 
-    return `SELECT ${columns} FROM ${tableName} WHERE ${whereClause}`
+    return `SELECT ${columns} FROM ${tableName} ${joinClause} ${whereValues.length > 0 ? whereClause: ""}`
   }
 
   insertInto(tableName = "", columns = "", numOfValues = 0) {
@@ -52,8 +55,8 @@ class Database {
 class Users extends Database {
   async getUser(username) {
     const sql = super.select("*", "users", ['email']);
-    const res = await super.query(sql, [username]);
-    return res;
+    const data = await super.query(sql, [username]);
+    return data[0];
   }
 
   async createUser(first, last, email, hashedPassword) {
@@ -67,6 +70,46 @@ class Users extends Database {
   };
 }
 
+
+class Messages extends Database {
+  async getAllMessages() {
+    const sql = super.select("message_id, first, last, title, time, text", "messages", [], "users", "messages.user_id = users.user_id");
+    const messages = await super.query(sql, []);
+    
+    const messagesWithFormattedDates = messages.map((message) => {
+      const isoDate = message.time;
+      let monthNum = isoDate.getMonth();
+      const day = isoDate.getDate();
+      const year = isoDate.getFullYear();
+      const hour24 = isoDate.getHours();
+      const hour12 = hour24 > 12 ? hour24 - 12 : hour24;
+      const minute = isoDate.getMinutes();
+      const ampm = hour24 >= 12 ? "PM" : "AM";
+      const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      const month = months[monthNum];
+      const dateString = `${month} ${day}, ${year} at ${hour12}:${minute}${ampm}`;
+      return { ...message, time: dateString };
+    });
+
+    return messagesWithFormattedDates;
+  }
+}
+
+
 module.exports = {
-  users: new Users()
+  users: new Users(),
+  messages: new Messages(),
 }
