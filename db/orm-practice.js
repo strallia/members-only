@@ -106,6 +106,11 @@ class Messages extends Database {
 
     return messagesWithFormattedDates;
   }
+
+  async postNewMessage(userID, title, text) {
+    const sql = super.insertInto("messages", "(user_id, title, text)", 3);
+    await super.query(sql, [userID, title, text]);
+  } 
 }
 
 
