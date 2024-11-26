@@ -8,13 +8,6 @@ const getRolePassword = async (role) => {
   return rows[0].password;
 }
 
-const upgradeRole = async (userID, role) => { 
-  await pool.query(
-    "UPDATE users SET role = $1 WHERE user_id = $2", 
-    [role, userID]
-  );
-};
-
 const postNewMessage = async (userID, title, text) => {
   await pool.query(
     "INSERT INTO messages (user_id, title, text) VALUES ($1, $2, $3)", 
@@ -69,7 +62,6 @@ const deleteMessage = async (messageID) => {
 
 module.exports = {
   getRolePassword,
-  upgradeRole,
   postNewMessage,
   getAllMessages,
   deleteMessage

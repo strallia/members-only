@@ -20,6 +20,28 @@ class Database {
     }
     return `INSERT INTO ${tableName} ${columns} VALUES (${valuesClause})`
   }
+
+  update(tableName = "", setValues = [], whereValues = []) {
+    let validationNumCount = 1;
+
+     // Generate SET clause
+     let setClause = "";
+     setValues.forEach((value, index) => {
+       if (index === 0) setClause += `${value} = $${validationNumCount}`
+       else setClause += `, ${value} =  $${validationNumCount}`;
+       validationNumCount++;
+     })
+
+    // Generate WHERE clause
+    let whereClause = "";
+    whereValues.forEach((value, index) => {
+      if (index === 0) whereClause += `${value} = $${validationNumCount}`
+      else whereClause += `, ${value} =  $${validationNumCount}`;
+      validationNumCount++;
+    })
+
+    return `UPDATE ${tableName} SET ${setClause} WHERE ${whereClause}`
+  }
 }
 
 class Users extends Database {
@@ -39,6 +61,10 @@ class Users extends Database {
     await this.query(sql, [first, last, email, hashedPassword]);
   };
 
+  async upgradeRole (userID, role) { 
+    const sql = super.update("users", ['role'], ["user_id"]);
+    await this.query(sql, [role, userID]);
+  };
 }
 
 module.exports = {
